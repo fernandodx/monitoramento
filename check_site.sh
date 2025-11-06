@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-SITE_URL="https://www.google.com/asdasdasdasdasd"
+SITE_URL="https://www.google.com/"
 
 #-w "%{http_code}" : Escreve apenas o código de status (200, 404, 503) 
 STATUS_CODE=$(curl -s -o /dev/null -w "%{http_code}" $SITE_URL)
