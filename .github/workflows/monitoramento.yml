@@ -1,0 +1,22 @@
+name: Monitor de Site
+
+#Gatilho , inicio do script
+on:
+  schedule:
+    -cron: '*/5 * * * *'
+  workflow_dispatch:   
+
+# o que fazer quando o agendamento for ativado
+jobs:
+  check-sites:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v3
+
+
+      - name: Executa o script de verificação do site
+        run: ./check_site.sh  
+    
+
