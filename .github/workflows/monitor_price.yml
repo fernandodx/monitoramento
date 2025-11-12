@@ -1,0 +1,47 @@
+name: Monitor de preço (Bitcoin)
+
+#Gatilho , inicio do script
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+  permissions:
+    issues: write
+    contents: read
+
+
+# o que fazer quando o agendamento for ativado
+jobs:
+  check-sites:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Instalar JQ e BC
+        run: sudo apt-get update && sudo apt-get install -y jq bc 
+
+      - name: Da permissão para o script
+        run: chmod +x ./check_price.sh    
+
+      - name: Executa o script de verificação
+        run: ./check_price.sh
+
+      - name: Criar Issue de Alerta no Github (em caso de falha)
+        if: failure() 
+        env: 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue create \
+            --title "ALERTA DE PREÇO: Bitcoin caiu!!!!" \
+            --body "O script de monitoramento detectou uma queda de preço!" \
+
+      
+
+      
+    
+
