@@ -6,9 +6,9 @@ on:
     - cron: '*/5 * * * *'
   workflow_dispatch:
 
-  permissions:
-    issues: write
-    contents: read
+permissions:
+  issues: write
+  contents: read
 
 
 # o que fazer quando o agendamento for ativado
