@@ -3,7 +3,7 @@ name: Monitor de preço (Bitcoin)
 #Gatilho , inicio do script
 on:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '*/3600 * * * *'
   workflow_dispatch:
 
 permissions:
